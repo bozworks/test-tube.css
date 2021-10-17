@@ -13,7 +13,7 @@ Animated test tube work with only CSS and HTML elements, level and color adjusta
 ```html
 <link
   rel="stylesheet"
-  href="https://cdn.jsdelivr.net/gh/bozworks@master/dist/test-tube.css"
+  href="https://cdn.jsdelivr.net/gh/bozworks/test-tube.css@master/dist/test-tube.css"
 />
 ```
 
