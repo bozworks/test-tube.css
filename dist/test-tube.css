@@ -1,0 +1,289 @@
+body {
+  background-color: #1d1d19;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  padding: 0;
+  margin: 0;
+  font-family: sans-serif;
+}
+
+:root {
+  --tube-percentage: 50%;
+  --tube-title: "50%";
+  --tube-color: #9198e5;
+}
+
+.tube {
+  position: relative;
+  height: 200px;
+  width: 50px;
+  border: 3px solid #272822;
+  border-radius: 0 0 50rem 50rem;
+  background-color: #272822;
+}
+
+.tube::after {
+  content: "";
+  position: absolute;
+  left: -10px;
+  top: -3px;
+  width: calc(100% + 20px);
+  height: 8px;
+  border-radius: 50rem;
+  background-color: #272822;
+}
+
+.tube .body {
+  position: absolute;
+  border-radius: inherit;
+  height: 100%;
+  width: 100%;
+  bottom: 0;
+  overflow: hidden;
+  z-index: 5;
+}
+
+.tube .shine {
+  position: absolute;
+  left: 10%;
+  top: 0;
+  width: 10%;
+  height: 100%;
+  z-index: 90;
+  opacity: 0.2;
+}
+
+.tube .shine::before,
+.tube .shine::after {
+  content: "";
+  position: absolute;
+  background-color: #fff;
+  border-radius: 50rem;
+  top: 10%;
+  height: 40%;
+  width: 100%;
+}
+
+.tube .shine::after {
+  height: 15%;
+  top: 60%;
+  bottom: 0;
+}
+
+@keyframes liquid {
+  0% {
+    transform: translateX(-50%) rotate(0deg);
+  }
+  100% {
+    transform: translateX(-50%) rotate(360deg);
+  }
+}
+
+.tube .liquid {
+  position: absolute;
+  height: 80%;
+  width: 100%;
+  bottom: 0;
+}
+
+.tube .liquid .percentage {
+  position: absolute;
+  height: var(--tube-percentage);
+  width: 100%;
+  bottom: 0;
+  left: 0;
+  z-index: 80;
+  transition: 1s;
+}
+
+.tube .liquid .percentage::after,
+.tube .liquid .percentage::before {
+  position: absolute;
+  content: "";
+  width: 200px;
+  height: 200px;
+  border-radius: 75px;
+  animation: liquid 4s infinite linear;
+  transform: translateX(-50%);
+  left: 50%;
+  top: 0;
+  background: var(--tube-color);
+  transition: 1s;
+}
+
+.tube .liquid .percentage::after {
+  opacity: 0.4;
+  animation-direction: reverse;
+  border-radius: 60px;
+}
+
+@keyframes bubble {
+  from {
+    background: #272822;
+    transform: scale(0.3) rotate(50deg);
+    margin-left: 0;
+  }
+
+  10% {
+    margin-left: 1px;
+  }
+
+  20% {
+    margin-left: -1px;
+  }
+
+  30% {
+    margin-left: 1px;
+  }
+
+  40% {
+    margin-left: -1px;
+  }
+
+  50% {
+    margin-left: 1px;
+    background: var(--tube-color);
+    transform: scale(0.85) rotate(50deg);
+    opacity: .75;
+  }
+
+  60% {
+    margin-left: -1px;
+  }
+
+  70% {
+    margin-left: 1px;
+  }
+
+  80% {
+    margin-left: -1px;
+  }
+
+  90% {
+    margin-left: 1px;
+  }
+
+  to {
+    margin-left: -1px;
+    bottom: 135%;
+    opacity: 0;
+    transform: scale(1) rotate(50deg);
+  }
+}
+
+.tube .bubbles {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: calc(var(--tube-percentage) + calc( 100% - var(--tube-percentage) ));
+  z-index: 10;
+}
+
+.tube .bubbles div{
+  position: absolute;
+  left: 30%;
+  border-radius: 50% 50% 0 50%;
+  background: var(--tube-color);
+  width: 10px;
+  height: 10px;
+  opacity: 0.8;
+  bottom: calc(var(--tube-percentage) / 3);
+  animation: bubble 3s infinite linear;
+  transform: scale(0.3) rotate(50deg);
+  transition: 1s;
+}
+
+.tube .bubbles div:nth-child(2) {
+  left: 40%;
+  opacity: 0.7;
+  animation-delay: 100ms;
+  animation-duration: 2.5s;
+}
+
+.tube .bubbles div:nth-child(3) {
+  left: 40%;
+  opacity: 0.6;
+  animation-delay: 200ms;
+}
+
+.tube .bubbles div:nth-child(4) {
+  left: 60%;
+  animation-delay: 250ms;
+  animation-duration: 1.75s;
+}
+
+.tube .bubbles div:nth-child(5) {
+  left: 50%;
+  opacity: 0.8;
+  animation-delay: 150ms;
+  animation-duration: 2.25s;
+}
+
+.tube .meter {
+  position: absolute;
+  height: 80%;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+}
+
+.tube .meter::after,
+.tube .meter::before {
+  content: var(--tube-title);
+  position: inherit;
+  left: 100%;
+  margin-left: 10px;
+  bottom: var(--tube-percentage);
+  transform: translateY(50%);
+  background: var(--tube-color);
+  color: #1D1D19;
+  padding: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 50%;
+  transition: 1s;
+}
+
+.tube .meter::after {
+  content: '';
+  border: 12px solid transparent;
+  border-right-color: var(--tube-color);
+  padding: 0;
+  border-radius: 0;
+  background: transparent;
+  transform: translate(-78%, 50%);
+}
+
+.tube .meter div {
+  position: absolute;
+  left: -4px;
+  top: 0;
+  font-size: 12px;
+  padding: 6px 2px 6px 4px;
+  color: #65665f;
+  border-top: 1px solid #65665f;
+  transform: translateX(-100%);
+}
+
+.tube .meter div:nth-child(2) {
+  top: 20%;
+}
+
+.tube .meter div:nth-child(3) {
+  top: 40%;
+}
+
+.tube .meter div:nth-child(4) {
+  top: 60%;
+}
+
+.tube .meter div:nth-child(5) {
+  top: 80%;
+}
+
+.tube .meter div:nth-child(6) {
+  top: 100%;
+}
